@@ -2,9 +2,6 @@
 var currentDayEl = $('#current-day');
 // var timeBlockEl = $('#time-block');
 var saveButton = $('saveButton');
-
-
-
 var taskInputEL = $('#tasks');
 
 
