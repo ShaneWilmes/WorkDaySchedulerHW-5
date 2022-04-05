@@ -46,7 +46,7 @@ function dayPlanner() {
         var currentTask = localStorage.getItem(hour);
 
         if(currentTask !== null) {
-            $(this).siblings('.plan').val(currentTask)
+            $(this).siblings('.task').val(currentTask)
         }
     })
 
