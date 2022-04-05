@@ -1,8 +1,7 @@
 // Targeting DOM Elements
-var currentDayEl = $('#current-day');
-// var timeBlockEl = $('#time-block');
+// var currentDayEl = $('#current-day');  Not needed
 var saveButton = $('saveButton');
-var taskInputEL = $('#tasks');
+var timeBlockEL = $('time-block');
 
 
 
@@ -16,22 +15,18 @@ function showToday() {
 setInterval(showToday);
 
 
+var textInput = document.getElementById('tasks');
+var saveButtonA = document.getElementById('saveButtonA');
 
 
+textInput.value = localStorage.getItem('text7');
 
-// function printDailyTask(dailyTask) {
-//     var taskInputEL = $('<textarea>').addClass('p-2').text(dailyTask);
+function setAppointment() {
+    var updateText = $("#tasks").val();
+        localStorage.setItem('text7', updateText);
+}
 
-// }
-
-
-// document.getElementById('tasks').innerHTML = function
-// var saveButton = document.getElementById('#saveButton');
-// localStorage.setItem('tasks');
-
-
-
-
+saveButtonA.addEventListener('click', setAppointment);
 
 
 
