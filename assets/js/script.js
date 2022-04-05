@@ -1,32 +1,60 @@
 // Targeting DOM Elements
-// var currentDayEl = $('#current-day');  Not needed
-var saveButton = $('saveButton');
-var timeBlockEL = $('time-block');
+var currentDayEl = $('#current-day');  
+var saveButton = $('.saveButton');
+// var timeBlockEL = $('.time-block');
+// // var HourEl = $('.hour');
+// var taskEl = $('.task');
 
 
 
 // Displays current date 
-function showToday() {
-    var today = moment().format('dddd, MMMM Do YYYY')
-    currentDayEl.text(today)
-}
-
-// Calls showToday to display the current date
-setInterval(showToday);
+$('#current-day').text(moment().format('dddd, MMMM Do YYYY'));
 
 
-var textInput = document.getElementById('tasks');
-var saveButtonA = document.getElementById('saveButtonA');
+// Color coded time blocks to indicate the time as past, present or future
+function timeBlockDisplay() {
+    var hour = moment().hours();
 
+    $('.time-block').each(function() {
+        var currentTime = parseInt($(this). attr('id'));
 
-textInput.value = localStorage.getItem('text7');
+        if (currentTime > hour) {
+            $(this).addClass('future');
+            
+        } else if (currentTime === hour) {
+            $(this).addClass('present');
+        } else {
+            $(this).addClass('past');
+        }
+    })
+};
 
-function setAppointment() {
-    var updateText = $("#tasks").val();
-        localStorage.setItem('text7', updateText);
-}
+// Clicking the save button for event to be saved in local storage
+saveButton.on('click', function() {
 
-saveButtonA.addEventListener('click', setAppointment);
+    var time = $(this).siblings('.hour').text();
+    var task = $(this).siblings('.task').val();
 
+    localStorage.setItem(time, task);
+});
 
+// Saved Events are displayed after page refresh/reload
+function dayPlanner() {
 
+    $('.hour').each(function() {
+        var hour = $(this).text();
+        var currentTask = localStorage.getItem(hour);
+
+        if(currentTask !== null) {
+            $(this).siblings('.plan').val(currentTask)
+        }
+    })
+
+};
+
+// Call functions to operate page
+
+timeBlockDisplay();
+dayPlanner();
+
+    
